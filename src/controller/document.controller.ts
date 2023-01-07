@@ -1,8 +1,20 @@
 import { Request, Response } from "express";
 
-export async function uploadDocumentHandler(
-    req: Request<{}, {}>,
+import {
+    DocumentRequest,
+    DocumentResponse,
+  } from "../dto/document.dto";
+  
+  import {
+    getDocument,
+  } from "../service/document.service";
+
+
+export async function getDocumentHandler(
+    req: Request<{}, DocumentResponse, DocumentRequest>,
     res: Response
   ) {
-    return ;
+    const document: DocumentResponse = await getDocument({documentId: "123"});
+  
+    return res.send(document);
   }

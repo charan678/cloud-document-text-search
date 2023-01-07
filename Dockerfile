@@ -5,4 +5,5 @@ RUN mkdir /cloud_document_text_search
 WORKDIR /cloud_document_text_search
 
 COPY . .
-RUN npm run test build
+RUN make install & make ci
+ENTRYPOINT npm start 

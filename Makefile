@@ -9,6 +9,9 @@ lint:
 
 ci: build test
 
+start : 
+	npm start
+	
 install: 
 	rm -rf node_modules
 	npm install
