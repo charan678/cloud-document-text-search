@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.245.0",
+    "@elastic/elasticsearch": "^8.5.0",
     "@types/axios": "^0.14.0",
     "@types/express": "^4.17.15",
     "@types/lodash": "^4.14.191",
@@ -42,6 +43,7 @@
     "morgan": "^1.10.0",
     "pino": "^8.8.0",
     "pino-pretty": "^9.1.1",
+    "postgres": "^3.3.3",
     "swagger-ui-express": "^4.6.0"
   }
 }
