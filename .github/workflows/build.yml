@@ -18,6 +18,11 @@ jobs:
       - name: Checkout repository
       - uses: actions/checkout@v2
 
+      - name: install dependencies
+      - run: |
+          make install 
+
       - name: run ci command
-        run: make ci
+        run: |
+          make ci
 
