@@ -1,0 +1,320 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Text Searcher API",
+    "description": "Cloud Document Text Searcher"
+  },
+  "servers": [
+    {
+      "url": "https://localhost"
+    }
+  ],
+  "paths": {
+    "/v1/documents": {
+      "get": {
+        "summary": "Read Documents",
+        "responses": {
+          "200": {
+            "description": "The document corresponding to the provided `documentId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No document found for the provided `documentId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/documents/{documentId}": {
+      "parameters": [
+        {
+          "name": "documentId",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "The unique identifier of the document",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Read a docment",
+        "responses": {
+          "200": {
+            "description": "The spacecraft corresponding to the provided `spacecraftId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No document found for the provided `documentId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/documents/upload": {
+      "post": {
+        "summary": "upload a document",
+        "responses": {
+          "200": {
+            "description": "Upload a document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No spacecraft found for the provided `spacecraftId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/documents/upload/{documentId}": {
+      "post": {
+        "summary": "Update a uploaded document",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "This is the unique identifier for a document",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload a document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No spacecraft found for the provided `spacecraftId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/search": {
+      "get": {
+        "summary": "Search text in Documents",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search text",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The document corresponding to the search query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "documents": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Document"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No document found for the provided `documentId`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Document": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "url",
+          "cloud"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "cloud": {
+            "type": "string",
+            "enum": [
+              "google-drive",
+              "aws-s3",
+              "local"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "pdf",
+              "csv",
+              "txt"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "description": "Server down",
+            "type": "string"
+          }
+        }
+      },
+      "ResourceNotFoundError": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "description": "Resource not found",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKey": []
+    }
+  ]
+}

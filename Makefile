@@ -1,20 +1,23 @@
-test: 
+test:
 	npm run test
 
-build: 
+build:
 	npm run build
 
-lint-fix: 
+lint-fix:
 	npm run lint-and-fix
 
-lint: 
+lint:
 	npm run lint
 
 ci: build test
 
-start : 
+start :
 	npm start
-	
-install: 
+
+install:
 	rm -rf node_modules
 	npm install
+
+inspect:
+	npm run start:inspect

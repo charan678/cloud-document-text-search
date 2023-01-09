@@ -11,25 +11,24 @@ services:
   postgres:
     container_name: postgres-container
     image: postgres:14.1-alpine
-      restart: always
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-      ports:
-        - '5432:5432'
-      volumes: 
-        - db:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+#    volumes:
+#      - db:/var/lib/postgresql/data
   api:
     container_name: cloud-text-searcher-container
     build:
       context: ./
-      target: development
     image: cloud_text_search_api
     depends_on:
       - postgres
       - elasticsearch
     ports:
-      - 3000:3000
+      - 3000:8000
     environment:
       NODE_ENV: development
       DB_HOST: db
