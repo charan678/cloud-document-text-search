@@ -1,7 +1,7 @@
 
 install:
-	rm -rf node_modules/
-	npm install
+	lerna bootstrap --ignore-scripts -- --no-package-lock
+	
 
 build:
 	npx lerna run build
