@@ -11,8 +11,8 @@ app.use('/v1/api-docs', swaggerUi.serve)
 
 routes(app);
 
-app.listen(8000, async () => {
+const server = app.listen(8000, async () => {
     console.log(`Example app listening on port 8000 `)
 });
 
-export default app;
+export default server;
