@@ -22,7 +22,7 @@ services:
   api:
     container_name: cloud-text-searcher-container
     build:
-      context: ./
+      context: packages/cloud-document-text-search-api
     image: cloud_text_search_api
     depends_on:
       - postgres
