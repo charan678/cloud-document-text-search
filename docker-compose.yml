@@ -19,7 +19,7 @@ services:
       - '5432:5432'
 #    volumes:
 #      - db:/var/lib/postgresql/data
-  api:
+  cloud-api:
     container_name: cloud-text-searcher-container
     build:
       context: packages/cloud-document-text-search-api
@@ -48,7 +48,7 @@ services:
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-  scheduler:
+  cloud-scheduler:
     container_name: cloud-document-scheduler-container
     build:
       context: packages/cloud-document-scheduler

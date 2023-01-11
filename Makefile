@@ -7,7 +7,7 @@ build:
 	npx lerna run build
 
 test:
-	npx lerna run build
+	npx lerna run test
 
 
 ci: build test
