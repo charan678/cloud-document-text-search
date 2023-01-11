@@ -27,6 +27,7 @@ services:
     depends_on:
       - postgres
       - elasticsearch
+      - queue
     ports:
       - 3000:8000
     environment:
@@ -47,6 +48,16 @@ services:
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+  scheduler:
+    container_name: cloud-document-scheduler-container
+    build:
+      context: packages/cloud-document-scheduler
+    image: cloud_document_scheduler
+    depends_on:
+      - postgres
+      - elasticsearch
+      - queue
+
 volumes:
   postgres:
     driver: local
