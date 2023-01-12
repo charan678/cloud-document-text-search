@@ -8,17 +8,6 @@ services:
       - "discovery.type=single-node"
     ports:
       - 9200:9200
-  postgres:
-    container_name: postgres-container
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
-#    volumes:
-#      - db:/var/lib/postgresql/data
   cloud-api:
     container_name: cloud-text-searcher-container
     build:
@@ -27,7 +16,7 @@ services:
     depends_on:
       - postgres
       - elasticsearch
-      - queue
+      - redis-queue
     ports:
       - 3000:8000
     environment:
@@ -42,7 +31,7 @@ services:
       - postgres
     volumes:
       - './:/src'
-  queue:
+  redis-queue:
     image: redis:6.2-alpine
     restart: always
     ports:
@@ -56,8 +45,7 @@ services:
     depends_on:
       - postgres
       - elasticsearch
-      - queue
-
+      - redis-queue
 volumes:
   postgres:
     driver: local

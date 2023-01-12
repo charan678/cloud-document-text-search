@@ -1,6 +1,6 @@
 
 install:
-	lerna bootstrap --ignore-scripts -- --no-package-lock
+	npx lerna bootstrap --ignore-scripts -- --no-package-lock
 	
 
 build:

@@ -1,20 +1,15 @@
 import { Request, Response } from "express";
 
 import {
-    DocumentRequest,
     DocumentResponse,
   } from "../dto/document.dto";
+
+import DocumentService from "../service/document.service";
   
-  import {
-    getDocument,
-  } from "../service/document.service";
-
-
 export async function getDocumentHandler(
-    req: Request<{}, DocumentResponse, DocumentRequest>,
-    res: Response
+    req: Request<{}>,
+    res: Response<DocumentResponse>
   ) {
-    const document: DocumentResponse = await getDocument({documentId: "123"});
-  
-    return res.send(document);
+    const searchText: string  = req.query.q as string;
+    return new DocumentService().getDocument(searchText);
   }

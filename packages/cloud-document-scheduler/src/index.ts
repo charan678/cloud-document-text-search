@@ -1,2 +1,7 @@
-const Queue = require('bee-queue');
-const addQueue = new Queue('addition');
+const cron = require('node-cron');
+
+cron.schedule('* * * * *', function() {
+    // Pull Event 
+    console.log("Pull Event from Redis Queue ")
+    documentSubscriber();
+});
