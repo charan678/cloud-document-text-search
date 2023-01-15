@@ -9,5 +9,7 @@ build:
 test:
 	npx lerna run test
 
-
+clean:
+	npx lerna clean
+	
 ci: build test

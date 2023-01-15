@@ -27,11 +27,11 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.5.0",
     "@types/lodash": "^4.14.191",
     "bee-queue": "^1.5.0",
     "node-cron": "^3.0.2",
     "ts-node": "^10.9.1",
-    "@elastic/elasticsearch": "^8.5.0",
     "typescript": "^4.9.4"
   }
 }
