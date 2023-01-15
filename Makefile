@@ -1,5 +1,5 @@
 
-install:
+install: clean
 	npx lerna bootstrap --ignore-scripts -- --no-package-lock
 	
 
@@ -10,6 +10,6 @@ test:
 	npx lerna run test
 
 clean:
-	npx lerna clean
+	npx lerna clean -y
 	
 ci: build test
